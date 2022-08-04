@@ -1,0 +1,10 @@
+{
+    "token" : "",
+    "guildId" : "",
+    "cfxId" : "",
+    "playerCountChannel" : "",
+    "serverStateChannel" : "",
+    "voiceStateChannel" : "",
+    "dbStateChannel" : "",
+    "fivemStateChannel" : ""
+}
