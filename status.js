@@ -19,5 +19,5 @@ module.exports = (client) => {
             serverStateChannel.setName('Gameserver: 🔴');
             fivemStateChannel.setName(cfxStatus.isOnline() ? "Platform: 🟢" : "Platform: 🔴");
         }
-    }, 5000);
+    }, 60000);
 }
