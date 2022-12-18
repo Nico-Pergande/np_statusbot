@@ -1,9 +1,6 @@
 module.exports = (client) => {
-    const cfx = require("cfx-api");
+    const cfx = require("@niclqs/cfx-data-fetcher");
     const config = require('./config.json');
-
-    var playerCount;
-    var cfxState;
 
     const guild = client.guilds.cache.get(config.guildId)
     const playerCountChannel = guild.channels.cache.get(config.playerCountChannel);
@@ -11,26 +8,16 @@ module.exports = (client) => {
     const fivemStateChannel = guild.channels.cache.get(config.fivemStateChannel);
 
     setInterval(async function(){
-        var stateStatus = await cfx.fetchServer(config.cfxId);
-        var cfxStatus = await cfx.fetchStatus();
+        var stateStatus = await cfx.fetchServerData(config.cfxId);
+        var cfxStatus = await cfx.fetchCfxStatus();
 
         if(stateStatus !== undefined){
             serverStateChannel.setName('Gameserver: 🟢');
-            if (stateStatus.playersCount !== playerCount){
-                playerCount = stateStatus.playersCount;
-                playerCountChannel.setName(`Player: ${stateStatus.playersCount} / ${stateStatus.maxPlayers}`);
-            }
-            if (cfxState !== cfxStatus){
-                cfxState = cfxStatus;
-                fivemStateChannel.setName(cfxStatus.everythingOk ? "Platform: 🟢" : "Platform: 🔴");
-            }
-            
+            fivemStateChannel.setName(cfxStatus.isOnline() ? "Platform: 🟢" : "Platform: 🔴");
+            playerCountChannel.setName(`Player: ${stateStatus.getPlayerCount()} / ${stateStatus.getMaxSlots()}`);
         } else {
             serverStateChannel.setName('Gameserver: 🔴');
-            if (cfxState !== cfxStatus){
-                cfxState = cfxStatus;
-                fivemStateChannel.setName(cfxStatus.everythingOk ? "Platform: 🟢" : "Platform: 🔴");
-            }
+            fivemStateChannel.setName(cfxStatus.isOnline() ? "Platform: 🟢" : "Platform: 🔴");
         }
-    }, 60000);
+    }, 5000);
 }

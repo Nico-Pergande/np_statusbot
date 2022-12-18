@@ -4,7 +4,5 @@
     "cfxId" : "",
     "playerCountChannel" : "",
     "serverStateChannel" : "",
-    "voiceStateChannel" : "",
-    "dbStateChannel" : "",
     "fivemStateChannel" : ""
 }

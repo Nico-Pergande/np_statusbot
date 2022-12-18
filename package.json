@@ -8,7 +8,7 @@
   "author": "Nico-Pergande",
   "license": "ISC",
   "dependencies": {
-    "cfx-api": "^1.0.122",
+    "@niclqs/cfx-data-fetcher": "^1.0.2",
     "discord.js": "^13.9.2"
   },
   "description": ""
